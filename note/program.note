@@ -1,0 +1,60 @@
+;;C-x C-e 对光标所处的最后一个表达式求值
+;;eval是“求值”的缩写，sexp是“符号表达式”的缩
+
+;;原子求值，直接返回原子
+"hello world"
+
+;;表达式求值
+(+ 1 2)
+
+;;以单引号开头，代表不对后边的表达式求值，直接返回表达式
+'(+ 3 3)
+'"hello world"
+
+;;这些表达式求值会出错，弹出错误提示的buffer窗口，要退出错误buffer窗口，键入q
+(+ 13 noExistVar)
+(this is an unquoted list)
+
+;;定义变量
+(defvar var 13)
+
+;;定义常量
+(defconst const 16)
+
+;;使用变量
+(+ 13 var)
+
+;;使用常量
+(+ 13 const)
+
+;;如果不带括号，是对变量求值,fill-column是一行显示的字数
+fill-column
+
+;;如果带了括号，是对函数求值，将会报错，因为fill-column只绑定了变量，没有绑定函数
+(fill-column)
+
+;;连接字符串
+(concat "abc" "def")
+
+;;获取sub string
+(substring "The quick brown fox jumped." 16 19)
+
+;;number转String
+(concat "The " (number-to-string (+ 2 fill-column)) " red foxes.")
+
+;;在提示区打印一条消息,可以格式化输出
+(message "this is a message!")
+(message "buffer name is %s , fill-column is %d"  (buffer-name)  fill-column)
+
+;;变量绑定set
+(set 'a '("b" "c"))
+
+;;setq是set的语法糖，q代表单引号，setq可以绑定一组变量
+(setq abc "abc")
+(setq abc "abc" def "def" hjk "hjk")
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+
+;;declare current path
+(defconst pwd 3.141592653589793 "current path")
+
+;;user slogen
+(defvar slogen "生命不息，折腾不止" "The normal weight of a bar.")
+	    
+;;load base profile 
+(load-file (expand-file-name pwd "base.el"))
