@@ -92,6 +92,15 @@
   (message "active evil")
 )
 
+;;让speedbar嵌入
+(require 'sr-speedbar)
+(setq sr-speedbar-right-side nil)
+(setq sr-speedbar-width 26)
+(setq sr-speedbar-auto-refresh t)
+(setq speedbar-show-unknown-files t)
+(global-set-key [f3] 'sr-speedbar-toggle)
+(setq speedbar-directory-unshown-regexp "^$")
+
 ;;添加smex https://github.com/nonsequitur/smex
 (require 'smex)
 (global-set-key (kbd "M-x") 'smex)
