@@ -1,4 +1,5 @@
 ;;C-x C-e 对光标所处的最后一个表达式求值
+;;C-u C-x C-e 对光标所处的最后一个表达式求值,求值的结果将直接显示在表达式之后
 ;;eval是“求值”的缩写，sexp是“符号表达式”的缩
 
 ;;原子求值，直接返回原子
@@ -14,18 +15,6 @@
 ;;这些表达式求值会出错，弹出错误提示的buffer窗口，要退出错误buffer窗口，键入q
 (+ 13 noExistVar)
 (this is an unquoted list)
-
-;;定义变量
-(defvar var 13)
-
-;;定义常量
-(defconst const 16)
-
-;;使用变量
-(+ 13 var)
-
-;;使用常量
-(+ 13 const)
 
 ;;如果不带括号，是对变量求值,fill-column是一行显示的字数
 fill-column
@@ -46,15 +35,154 @@ fill-column
 (message "this is a message!")
 (message "buffer name is %s , fill-column is %d"  (buffer-name)  fill-column)
 
+
+
+;;------------------------------变量--------------------——————————————————
+;;定义变量
+(defvar var 13)
+
+;;定义常量
+(defconst const 16)
+
+;;使用变量
+(+ 13 var)
+
+;;使用常量
+(+ 13 const)
+
 ;;变量绑定set
 (set 'a '("b" "c"))
 
-;;setq是set的语法糖，q代表单引号，setq可以绑定一组变量
+;;setq是set的语法糖，q代表单引号(quote)，setq可以绑定一组变量
 (setq abc "abc")
 (setq abc "abc" def "def" hjk "hjk")
 
+;;局部变量定义:
+;;    (let (
+;;             (变量名 初始值)
+;;	       (变量名 初始值)
+;;	       (变量名 初始值)
+;;	       ......
+;;     	   )
+;;    )
+
+(let (
+	(var1 "var1")
+	(var2 "var2")
+	var3
+	(var4 (+ 1 2))
+     )
+
+     (message "var1=%s var2=%s var3=%s var4=%d" var1 var2 var3 var4)
+)
+
+;;------------------------------函数--------------------——————————————————
+;;函数定义:
+;;    (defun 函数名 （参数列表）
+;;        "函数描述"			;可选
+;;	  (interative 交互参数类型)	;可选,可交互的函数相当于是命令，可以绑定快捷键
+;;        (函数体表达式)
+;;    )
 
 
+(defun log (msg)
+    "this is a log function"
+    (message msg)
+)
+
+(log "this is a log")
+
+;;这个函数的交互方式是 先C-u 然后输入3  再M-x 然后输入add 
+(defun add (num)
+    (interactive "p") ;p代表交互时需要传入一个前置参数，参数类型是munber
+    (message "result is %d" (+ num num))
+)
+
+(defun print (str1 str2)
+
+    ;第一个字符是特殊码，代表参数类型，s代表要输入一个字符串，可以有多个参数，用\n隔开
+    (interactive "sString1: \nsString2:")
+    (message (concat str1 str2))
+)
+
+;;------------------------------分支--------------------——————————————————
+;;(if (test) (then) (else))
+;;在emacs lisp中，nil被定义为假，除此之外，一切皆为真
+
+(defun test (num)
+    "test if num big then 5"
+    (if (> num 5) (message "num%d big then 5" num))
+)
+
+(test 4)
+(test 6)
+
+(defun is-my-name (name)
+    "check if my name"
+    (if (equal name "terry")
+    	(message "yes, my name is terry")
+	(message "no, %s is not my name" name)
+    )
+)
+
+(is-my-name "haha")
+(is-my-name "terry")
+
+;;-----------------------------常见范式-------------------——————————————————
+;;emacs编程中通常用save-excursion函数来保存现场，
+;;在执行完需要的表达式后，用它来恢复缓冲区状态，比如光标位置等
+
+;;通常用let定义函数类局部变量
+
+;;范式为：
+
+(let (
+	(var1 "value1")
+	(var2 "value2")
+	(var3 "value3")
+	......
+     )
+
+     (save-excursion
+	表达式1
+	表达式2
+	表达式3
+	......
+     )
+)
+
+;;-----------------------------buffer-------------------——————————————————
+(buffer-name)
+(buffer-file-name)
+(current-buffer)
+(other-buffer)
+(switch-to-buffer (other-buffer))
+(point)
+(point-min)
+(point-max)
+(beginning-of-buffer)
+(end-of-buffer)
 
 
+;;实现一个简单的beginning-of-buffer
+(defun my-goto-buffer-begin ()
+    (interactive)
+
+    (goto-char (point-min))
+)
+
+;;实现一个内容全选的函数
+(defun my-select-whole ()
+  (interactive)
+  (push-mark (point))
+  (push-mark (point-max) nil t)
+  (goto-char (point-min))
+  )
+
+;;learning at Buffer Walk Through
+
+(list (read-buffer "Append to buffer: " (other-buffer (current-buffer) t))
+       (region-beginning)
+       (region-end)
+)
 

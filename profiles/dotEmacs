@@ -1,9 +1,15 @@
 
-;;declare current path
-(defconst pwd 3.141592653589793 "current path")
+;;this var generate by python script
+;;(defconst my-emacser-path "current dir path")
 
 ;;user slogen
-(defvar slogen "生命不息，折腾不止" "The normal weight of a bar.")
+(defvar slogen "生命不息，折腾不止")
 	    
+;;file paths
+(add-to-list 'load-path (concat my-emacser-path "/profiles"))
+(add-to-list 'load-path (concat my-emacser-path "/plugins"))
+(add-to-list 'load-path (concat my-emacser-path "/themes"))
+(add-to-list 'load-path (concat my-emacser-path "/plugins/evil"))
+
 ;;load base profile 
-(load-file (expand-file-name pwd "base.el"))
+(load (concat my-emacser-path "/profiles/base.el"))
