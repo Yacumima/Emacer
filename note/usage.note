@@ -63,4 +63,37 @@
 	C-h v 	  用来显示 Emacs 变量的文档
 	C-h a     相关命令搜索（Command Apropos)
 	C-h i     阅读手册
-	
+
+
+
+自定义命令：
+
+	C-x p	到文档尾
+
+	C-x w	到文档首
+
+	C-k	    删除整行
+
+	C-x m	选中标记
+
+	C-c e	使用etags生成tags
+
+	C-c r	读取当前目录下的tags
+
+	C-c g	跳轉到一行
+
+	C-c m	设置书签
+
+	C-c j	跳转到设置的书签
+
+	C-c km 	移除书签
+
+	F1		切换窗口
+
+	F2		纵向分割窗口
+
+	F3		横向分割窗口
+
+	F4		Speed bar
+
+	F5		移除窗口

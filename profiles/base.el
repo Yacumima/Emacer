@@ -4,6 +4,9 @@
 (setq user-full-name "terry.xiong")
 (setq user-mail-address "terry_xiong@sohu.com")
 
+;;使用lisp-mode打开.el文件
+(setq auto-mode-alist (cons '("\\.el$" . lisp-mode) auto-mode-alist))
+
 ;;显示图片
 (auto-image-file-mode t)
 
@@ -71,7 +74,7 @@
 ;;(my-maximized)
 
 ;; 启动窗口大小
-(setq default-frame-alist '((height . 36) (width . 128) (menu-bar-lines . 20) (tool-bar-lines . 0)))
+(setq default-frame-alist '((height . 52) (width . 128)))
 
 ;;禁止自动保存
 ;;(auto-save-mode nil)
@@ -98,7 +101,6 @@
 (setq sr-speedbar-width 26)
 (setq sr-speedbar-auto-refresh t)
 (setq speedbar-show-unknown-files t)
-(global-set-key [f3] 'sr-speedbar-toggle)
 (setq speedbar-directory-unshown-regexp "^$")
 
 ;;添加smex https://github.com/nonsequitur/smex
@@ -145,8 +147,17 @@
 ;;F1切换窗口
 (global-set-key [f1] 'other-window)
 
-;;F2 kill窗口
-(global-set-key [f2] 'kill-buffer-and-window)
+;;F2纵向分割窗口
+(global-set-key [f2] 'split-window-horizontally)
+
+;;F3横向分割窗口
+(global-set-key [f3] 'split-window-below)
+
+;;F4Speed bar
+(global-set-key [f4] 'sr-speedbar-toggle)
+
+;;F5移除窗口
+(global-set-key [f5] 'kill-buffer-and-window)
 
 ;;关闭提示音
 ;;(setq visible-bell nil)
@@ -156,6 +167,22 @@
 
 ;;使用鼠标中键可以粘贴
 (setq mouse-yank-at-point t)
+
+;;C-c e使用etags生成tags
+(defun etags-terry ()
+  (interactive)
+  (shell-command "find . -name \"*.*\" -print | etags -")
+  )
+(global-set-key (kbd "C-c e") 'etags-terry)
+
+(global-set-key (kbd "M-;") 'pop-tag-mark)
+
+;;C-c r读取当前目录下的tags
+(defun read-tags-terry ()
+  (interactive)
+  (visit-tags-table "./TAGS")
+  )
+(global-set-key (kbd "C-c r") 'read-tags-terry)
 
 ;;文件保存前自动删除行尾空白
 (defun clear-white-spaces-terry ()
