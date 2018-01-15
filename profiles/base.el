@@ -44,7 +44,7 @@
 (tool-bar-mode 0)
 
 ;;去掉菜单栏
-;;(menu-bar-mode 0)
+(menu-bar-mode 0)
 
 ;; 去掉滚动栏
 ;;(scroll-bar-mode 0)

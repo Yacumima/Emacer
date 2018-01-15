@@ -10,6 +10,9 @@
 (add-to-list 'load-path (concat my-emacser-path "/plugins"))
 (add-to-list 'load-path (concat my-emacser-path "/themes"))
 (add-to-list 'load-path (concat my-emacser-path "/plugins/evil"))
+(add-to-list 'load-path (concat my-emacser-path "/plugins/js2-mode"))
 
 ;;load base profile 
 (load (concat my-emacser-path "/profiles/base.el"))
+(load (concat my-emacser-path "/profiles/web.js.el"))
+(load (concat my-emacser-path "/profiles/python.el"))
