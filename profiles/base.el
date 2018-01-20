@@ -59,7 +59,7 @@
 
 ;;设置字体
 ;;方法为: emacs->options->Set Default Font->"M-x describe-font"查看当前使用的字体名称、字体大小
-(set-default-font "-*-Menlo-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+;;(set-default-font "-*-Menlo-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
 
 ;;显示列号
 (setq column-number-mode t)
