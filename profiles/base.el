@@ -74,7 +74,7 @@
 ;;(my-maximized)
 
 ;; 启动窗口大小
-(setq default-frame-alist '((height . 52) (width . 128)))
+(setq default-frame-alist '((height . 52) (width . 108)))
 
 ;;禁止自动保存
 ;;(auto-save-mode nil)
