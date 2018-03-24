@@ -7,6 +7,9 @@ homeDir = os.getenv('HOME')
 pwd = os.path.dirname(os.path.realpath(__file__))
 dotEmacs = pwd + '/profiles/dotEmacs'
 
+print('apply vim')
+os.system(pwd+'/vim/apply.sh '+pwd+'/vim')
+
 if(not os.path.exists(dotEmacs)):
     print('file:'+dotEmacs+' not exist')
     exit(-1)
